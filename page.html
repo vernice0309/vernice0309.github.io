@@ -3,13 +3,20 @@
 <head>
 	<title>Time Table</title>
 		<style>
-			
+
+		@font-face {
+			    font-family: 'TwiggyPop'; /*a name to be used later*/
+			    src: url('font/TwiggyPop.ttf'); /*URL to font*/
+			}
+
+
 			body {
 
 				background-color: #99ffeb; 
 				background-image: url("image/image1.png");
 				margin: 0px;
-			}
+				font-family: 'TwiggyPop'; 
+			   			}
 
 			em {
 
@@ -166,6 +173,7 @@
 			<th>what color is it( or mostly)</th>
 			<th>where do they mostly live</th>
 			<th>size</th>
+  			<td>image</td>
 		</thead>
 		<tbody>
 			<tr id="row_a">
@@ -173,19 +181,21 @@
 				<td>the color of red squirrels(Fox squirrels) are red</td>
 				<td>north america</td>
 				<td>about a meter(39 cm) long</td>
-				
+				<td><img src="image/redsquirrel.jpg"></td>
 			</tr>
 			<tr id="row_b">
 				<td>Gray squirrels</td>
 				<td>the color is grayish-brown</td>
 				<td>United States and Canada</td>
 				<td>23 to 30 cm( 9 to 12 inches)</td>
+				<td><img style="width: 256px" src="image/graysquirrel.jpg"></td>
 			</tr>
 			<tr id="row_a">
 				<td>Flying squirrels</td>
 				<td>Gray-and-brown</td>
 				<td>most the temperate regions of the Northern Hemisphere, from Finland to Japan, India, and Indonesia, and from Canada through the United States to Mexico and Central America</td>
 				<td>Southern Flying squirrels is about 8 to 10 inches in length. Nothern Flying squirrels are 10 to 12 inches long</td>
+				<td><img src="image/flyingsquirrel.jpg"></td>
 			</tr>
 		</tbody>
 	</table>
