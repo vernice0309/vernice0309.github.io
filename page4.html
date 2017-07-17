@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<style>
+		@font-face {
+			    font-family: 'TwiggyPop'; /*a name to be used later*/
+			    src: url('font/TwiggyPop.ttf'); /*URL to font*/
+			}
+			
+			body {
+
+				background-color: #99ffeb; 
+				background-image: url("image/image1.png");
+				margin: 0px;
+				font-family: "TwiggyPop";
+			}
+
+			em {
+
+				color: #a366ff;
+				font-size: 45px;
+
+			}
+
+			text {
+				font-size: 25px;
+			}
+
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				padding-top: 0px;
+				overflow: hidden;
+				background-color: #4da6ff;
+				top: 0;
+				width: 100%;
+			}
+
+			li {
+				float: left;
+				border-right: 1px solid #DDDDDD;
+			}
+
+			li a {
+				display: block;
+				padding: 12px;
+				color: white;
+				text-align: center;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #0073e6;
+			}
+
+			h1 {
+				padding-top: 40px;
+			}
+
+			.contents {
+				margin: 8px;
+			}
+
+			.banner{
+				width: 100%;
+
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		
+		<img src="image/banner.jpg" class="banner">
+
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="introduction.html">Introduction</a></li>
+			<li><a href="quiz.html">Quiz</a></li>
+			<li><a href="page.html">Time Table</a></li>
+			<li><a href="page2.html">Poem</a></li>
+			<li><a href="page3.html">Canvas</a></li>
+			<li><a href="news.html">News</a></li>
+			<li><a href="kanahei.html">Kanahei</a></li>
+			<li><a href="page4.html">profile</li>
+		</ul>
+<button onclick = "myfunction()" > Click Me</button>
+
+<p id="demo"></p>
+
+<script>
+function myfunction() {
+	document.getElementById("demo").innerHTML = "Have a Good Day";
+}
+</script>
+</body>
+<!-- <script>
+document.write("Hello! <br> Let me introduce you to the world of JavaScript");
+document.write("<br>My name is Vernice, and I am 10 years old now");
+document.write("<br>I am grade 6 after this summer holiday");
+alert("welcome to this website");
+// var name = prompt("What is your name?");
+// document.write("<br>Hello, ", name, "!");
+// var hobbie = prompt("What is your favorite hobbie?");
+// document.write("<br>", hobbie, " is a nice hobbie!");
+// var color = prompt("What color do you like?");
+// document.write("<br>", color, " is a great color and I like it too!");
+// document.write("Hello! <br> Let me introduce you to the world of JavaScript");
+var adjective = prompt("Type a adjective");
+var noun = prompt("Type a noun");
+var verb = prompt("Type a verb");
+document.write("<br>", adjective, " ", noun, " ", verb," over the naughty cat") ;
+
+var words = [
+	"flower",
+	"happy",
+	"blue",
+	"cake",
+]
+
+var word = words[2];
+var answerArray = [];
+for (var i = 0; i < word.length; i++){
+	answerArray[i] = "_";
+}
+var remainingLetters = word.length;
+while (remainingLetters > 0){
+	alert(answerArray.join(" "));
+var guess = prompt("guess a letter");
+for (var j = 0; j < word.length; j++) {
+	if (word[j] === guess) {
+		answerArray[j] = guess;
+		remainingLetters--;
+	}
+}
+
+}
+</script> -->
+</html>
