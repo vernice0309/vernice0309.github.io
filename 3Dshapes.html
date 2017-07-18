@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		@font-face {
+			    font-family: 'TwiggyPop'; /*a name to be used later*/
+			    src: url('font/TwiggyPop.ttf'); /*URL to font*/
+			}
+			
+			body {
+
+				background-color: #99ffeb; 
+				background-image: url("image/image1.png");
+				margin: 0px;
+				font-family: "TwiggyPop";
+			}
+
+			em {
+
+				color: #a366ff;
+				font-size: 45px;
+
+			}
+
+			text {
+				font-size: 25px;
+			}
+
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				padding-top: 0px;
+				overflow: hidden;
+				background-color: #4da6ff;
+				top: 0;
+				width: 100%;
+			}
+
+			li {
+				float: left;
+				border-right: 1px solid #DDDDDD;
+			}
+
+			li a {
+				display: block;
+				padding: 12px;
+				color: white;
+				text-align: center;
+				text-decoration: none;
+			}
+
+			li a:hover {
+				background-color: #0073e6;
+			}
+
+			h1 {
+				padding-top: 40px;
+			}
+
+			.contents {
+				margin: 8px;
+			}
+
+			.banner{
+				width: 100%;
+
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		
+		<img src="image/banner.jpg" class="banner">
+
+		<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="introduction.html">Introduction</a></li>
+			<li><a href="quiz.html">Quiz</a></li>
+			<li><a href="page.html">Time Table</a></li>
+			<li><a href="page2.html">Poem</a></li>
+			<li><a href="page3.html">Canvas</a></li>
+			<li><a href="news.html">News</a></li>
+			<li><a href="kanahei.html">Kanahei</a></li>
+			<li><a href="page4.html">profile</a></li>
+			<li><a href="3Dshapes.html">3D shapes</a></li>
+		</ul>
+		<button onclick = "start()">spin</button>
+		<button onclick = "stop()">stop</button>
+
+</body>
+<script src = "http://gamingJS.com/Three.js"></script>
+		<script src = "http://gamingJS.com/ChromeFixes.js"></script>
+		<script>
+		//Type this part out first and you will learn about the code very soon
+		var scene = new THREE.Scene();
+		var aspect_ratio = window.innerWidth/window.innerHeight;
+		var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
+		camera.position.z = 800;
+		scene.add(camera);
+		var renderer = new THREE.CanvasRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+		//-----------------PAY ATTENTION!!!--------------------
+		//-----------The following code is for generating the sphere! ----------------
+
+		var cover = new THREE.MeshNormalMaterial();
+		var shape_ball = new THREE.SphereGeometry(100, 10, 10);
+		var ball = new THREE.Mesh(shape_ball, cover);
+		ball.position.set(0, 200, 0);
+		scene.add(ball);
+
+		
+		// var shape_cube = new THREE.CubeGeometry(200,100,100);
+		// var box = new THREE.Mesh(shape_cube, cover);
+		// box.position.set(-150,0,0);
+		// box.rotation.set(0.5, 0.5, 0.5);
+		// scene.add(box);
+		
+		// var shape_cylinder = new THREE.CylinderGeometry(50,50,200,50);
+		// var tube = new THREE.Mesh(shape_cylinder, cover);
+		// tube.position.set(250,300,0);
+		// tube.rotation.set(0.5, 0.5, 0.5);
+		// scene.add(tube);
+
+		var shape_torus = new THREE.TorusGeometry(200,25, 8, 3);
+		var donut = new THREE.Mesh(shape_torus, cover);
+		donut.position.set(0, 200, 0);
+		scene.add(donut);
+
+		var clock = new THREE.Clock();
+		var spinning = false;
+		function animate()
+		{
+			requestAnimationFrame(animate);
+			var t = clock.getElapsedTime();
+
+			if(spinning) {
+				donut.rotation.set(2*t, 0, 0);
+			}
+			renderer.render(scene, camera)
+		}
+
+		function start() {
+			spinning = true;
+			animate();
+		}
+		function stop() {
+			spinning = false;
+		}
+
+
+		renderer.render(scene, camera);
+		</script>
+
+</html>
