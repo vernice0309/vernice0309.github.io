@@ -87,8 +87,9 @@
 			<li><a href="kanahei.html">Kanahei</a></li>
 			<li><a href="page4.html">hang man</a></li>
 			<li><a href="3Dshapes.html">3D shapes</a></li>
+			<li><a href="avatar.html">Avatar</a></li>
 		</ul>
-<button onclick = "myfunction()" > Click Me</button>
+<button onclick = "hangman()" > Play Hang man</button>
 
 <p id="demo">Good Morning</p>
 
@@ -96,6 +97,57 @@
 function myfunction() {
 	document.getElementById("demo").innerHTML = "Have a Good Day";
 }
+
+function hangman()
+{
+var words = [
+	"flower",
+	"happy",
+	"blue",
+	"cake",
+	"strategy",
+	"guardian",
+	"blizzard",
+	"synonym",
+	"antonym",
+	"complex",
+	"companion",
+	"coding",
+	"javascript",
+	"anatomy",
+	"doctor",
+	"engineer",
+	"teacher",
+	"student"
+
+]
+
+var word = words[Math.floor(Math.random()*18)];
+var answerArray = [];
+for (var i = 0; i < word.length; i++){
+	answerArray[i] = "_";
+}
+var remainingLetters = word.length;
+while (remainingLetters > 0){
+	alert(answerArray.join(" "));
+	var guess = prompt("guess a letter");
+	correct = 0;
+	for (var j = 0; j < word.length; j++) {
+		if (word[j] === guess) {
+			answerArray[j] = guess;
+			remainingLetters--;
+			correct = 1;
+		}
+
+	}
+	if (correct == 0) {
+		document.write(guess);
+		document.write(" ")
+	}
+}	
+}
+
+
 </script>
 </body>
 <script>
@@ -115,29 +167,6 @@ function myfunction() {
 // var verb = prompt("Type a verb");
 // document.write("<br>", adjective, " ", noun, " ", verb," over the naughty cat") ;
 
-var words = [
-	"flower",
-	"happy",
-	"blue",
-	"cake",
-]
 
-var word = words[2];
-var answerArray = [];
-for (var i = 0; i < word.length; i++){
-	answerArray[i] = "_";
-}
-var remainingLetters = word.length;
-while (remainingLetters > 0){
-	alert(answerArray.join(" "));
-var guess = prompt("guess a letter");
-for (var j = 0; j < word.length; j++) {
-	if (word[j] === guess) {
-		answerArray[j] = guess;
-		remainingLetters--;
-	}
-}
-
-}
 </script>
 </html>

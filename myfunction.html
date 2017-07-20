@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script>
+	
+function introduction()
+{
+	var name = prompt("What is your name?");
+	var age = prompt("What is your age?");
+	document.write("Your name is ", name, "!<br>");
+	document.write("Your age is ", age, "!<br>");
+
+}
+
+function add()
+{
+	var number1 = parseInt(prompt("choose a number!"));
+	var number2 = parseInt(prompt("choose another number!"));
+	var sum = number1 + number2;
+	document.write("The sum of nembers is ", sum);
+}
+
+function guess() {
+	var compChoice = Math.floor(Math.random()* 10+1);
+	var guessnumber = parseInt(prompt("Guess a number!"));
+	while (compChoice != guessnumber) {
+		guessnumber = parseInt(prompt("Guess a number!"));
+	}
+}
+
+guess();
+//add();
+//introduction();
+</script>
+
+</body>
+</html>
