@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-
 <html>
+<head>
+	<title></title>
 
-	<head>
-
-		<title>Vernice's Website</title>
-
-		<style>
+<style>
 
 			@font-face {
 			    font-family: 'TwiggyPop'; /*a name to be used later*/
@@ -67,11 +64,11 @@
 			.contents {
 				margin: 8px;
 			}
-
 			.banner{
 				width: 100%;
 
 			}
+
 
 		</style>
 
@@ -100,23 +97,55 @@
 
 		<div class="contents">
 
-			<h1>Welcome to <em>Vernice's</em> Website</h1>
+</head>
+<body>
+<script type="text/javascript">
+var div = document.createElement("div");
+	
+	function add(){
+		var numberOne = parseInt(prompt("Give me a number"));
+		var numberTwo = parseInt(prompt("Give me another number"));
+		div.textContent = numberOne + numberTwo;
+		document.body.appendChild(div);
+	}
+	function minus()
+	{
+		var numberOne = parseInt(prompt("Give me a number"));
+		var numberTwo = parseInt(prompt("Give me another number"));
+		div.textContent = numberOne - numberTwo;
+		document.body.appendChild(div);
+	}
+	function times()
+	{
+		var numberOne = parseInt(prompt("Give me a number"));
+		var numberTwo = parseInt(prompt("Give me another number"));
+		div.textContent = numberOne * numberTwo;
+		document.body.appendChild(div);
+	}
+	function divide()
+	{
+		var numberOne = parseInt(prompt("Give me a number"));
+		var numberTwo = parseInt(prompt("Give me another number"));
+		div.textContent = numberOne /  numberTwo;
+		document.body.appendChild(div);
 
-			<p>Welcome to this website, This is the first time I make a website. Hope it is a good website.<br></p>
-			<br>
-			<p>Because my school installed a <strong>bad search engine</strong> for me, so that I will put <a href="https://www.google.com.hk/?gfe_rd=cr&ei=AEzCWI37H6_o8Af9paagDg&gws_rd=ssl">Google</a> here =]
-			</p>
+	}
+	function percentof()
+	{
+		var numberOne = parseInt(prompt("Give me a number (percent)"));
+		var numberTwo = parseInt(prompt("Give me another number (percent of)"));
+		div.textContent = numberOne * numberTwo / 100 
+		document.body.appendChild(div);
 
-			<img src="image/imagerabbit1.png">
+	}
 
-			<p>there are <text style="color: red;">d</text><text style="color: #ff80bf;">r</text><text style="color: red;">a</text><text style="color: #ff80bf;">w</text><text style="color: red;">i</text><text style="color: #ff80bf;">n</text><text style="color: red;">g</text><text style="color: #ff80bf;">s</text> that I drew</p>
-			
-			<img src="image/aboutpusheen.gif">
+</script>
 
-		</div>
+<input type="submit" name="" value="Addition" onclick="add()"> 
+<input type="submit" name="" value="Subtraction" onclick="minus()"> 
+<input type="submit" name="" value="Multiplication" onclick="times()"> 
+<input type="submit" name="" value="Division" onclick="divide()"> 
+<input type="submit" name="" value="Percentage Of!" onclick="percentof()"> 
 
-
-
-	</body>
-
+</body>
 </html>

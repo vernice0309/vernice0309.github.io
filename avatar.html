@@ -88,6 +88,7 @@
 			<li><a href="page4.html">hang man</a></li>
 			<li><a href="3Dshapes.html">3D shapes</a></li>
 			<li><a href="avatar.html">Avatar</a></li>
+			<li><a href="clicking game.html">clicking game</a></li>
 		</ul>
 </body>
 		<script src = "script/THREE.js"></script>
@@ -99,7 +100,7 @@
 		var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
 		camera.position.z = 800;
 		scene.add(camera);
-		var renderer = new THREE.CanvasRenderer();
+		var renderer = new THREE.WebGLRenderer();
 		renderer.setSize(window.innerWidth, window.innerHeight);
 		document.body.appendChild(renderer.domElement);
 		//-----------------PAY ATTENTION!!!--------------------

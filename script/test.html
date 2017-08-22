@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	document.write("hello my name is Vernice")
+	var vernice = 200;
+	document.write(vernice)
+	var car = 
+	{
+		brand: "Toyota",
+		year: "2013",
+		color: "Blue",
+
+		display: function() {
+			document.write("brand:", this.brand, "<br>");
+			document.write("year:", this.year, "<br>");
+			document.write("color:", this.color,"<br>");
+		}
+	}
+	car.display();
+var newCar = Object.create(car)
+newCar.brand = "BMW"
+newCar.year = "2007"
+newCar.color = "Turquoise"
+newCar.display();
+
+
+var human = {
+
+name:"May",
+
+age:"8",
+
+favorite_color:"Blue",
+
+display: function(){
+
+	document.write("name:", this.name, "<br>")
+	document.write("age:", this.age, "<br>")
+	document.write("favorite color:", this.favorite_color, "<br>")
+}
+} 
+
+var newhuman = Object.create(human)
+newhuman.name = "Marmik" 
+newhuman.age = "85"
+newhuman.favorite_color = "Green"
+newhuman.display();
+
+
+
+</script>
+</body>
+</html>

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>quiz</title>
-
-		<style>
+	<title></title>
+<style>
 
 			@font-face {
 			    font-family: 'TwiggyPop'; /*a name to be used later*/
@@ -64,16 +63,19 @@
 			.contents {
 				margin: 8px;
 			}
-
 			.banner{
 				width: 100%;
 
 			}
 
+
 		</style>
-</head>
-<body>
-	<img src="image/banner.jpg" class="banner">
+
+	</head>
+
+	<body>
+		
+		<img src="image/banner.jpg" class="banner">
 
 		<ul>
 			<li><a href="index.html">Home</a></li>
@@ -90,20 +92,27 @@
 			<li><a href="clicking game.html">Clicking game</a></li>
 			<li><a href="calculator.html">Calculator</a></li>
 
-		</ul>	
-	<div class="contents">	
-		<p>A man lives on the 17th floor. He only rides elevator to his own floor when it's raining or when one of his neighbors rides it with him. If the weather is sunny or he's alone in the elevator, he only rides as far as the 9th floor, and goes the rest of the way up stairs. Why?</p>
-		<h5><a href="a1.html">Answer</a></h5>
-		<p>If it is raining at 12 a.m.,could you expect sunny weather in 72 hours?</p>
-		<h5><a href="a2.html">Answer</a></h5>
-		<p>Several people were asked to jump over a pencil put on the floor, but none of them could do it. Why?</p>
-		<h5><a href="a3.html">Answer</a></h5>
 
-		<h2>If you are intersted:</h2>
-		<h3><a href="https://layton.world/">Layton World</a></h3>
+		</ul>
 
-		<button class="button"><a href="index.html">Home</a></button>
-	</div>
+		<div class="contents">
+
+</head>
+<body>
+
+<script type="text/javascript">
+var times_clicked = 0
+var div = document.createElement("div")
+function clicked(){
+	times_clicked = times_clicked + 1
+	div.textContent = "you have clicked "+ times_clicked + " times"
+	document.body.appendChild(div)
+
+}
+
+</script>
+
+<input type="submit" name="" value="click me" onclick="clicked()"> 
 
 </body>
 </html>
