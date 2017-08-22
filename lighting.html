@@ -42,7 +42,8 @@
 		scene.add(ground)
 		ground.position.set(0,-200,0);
 		ground.rotation.set(-Math.PI/2, 0, 0);
-		//ground.receiveShadow = true;
+		ground.receiveshadow = true;
+
 		renderer.render(scene, camera);
 
 	

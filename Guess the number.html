@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title></title>
-
 <style>
 
 			@font-face {
@@ -64,11 +63,11 @@
 			.contents {
 				margin: 8px;
 			}
+
 			.banner{
 				width: 100%;
 
 			}
-
 
 		</style>
 
@@ -97,56 +96,26 @@
 		</ul>
 
 		<div class="contents">
-
 </head>
 <body>
 <script type="text/javascript">
-var div = document.createElement("div");
-	
-	function add(){
-		var numberOne = parseInt(prompt("Give me a number"));
-		var numberTwo = parseInt(prompt("Give me another number"));
-		div.textContent = numberOne + numberTwo;
-		document.body.appendChild(div);
+	var random_number = Math.floor(Math.random() * 100) + 1;
+	var player = -1;
+	var turns = 0
+	while (random_number!=player) {
+		turns = turns + 1
+		player = parseInt(prompt("Enter a number"));
+		if (player > random_number) {
+			alert("Too High, give a smaller number");
+		} else if (player < random_number) {
+			alert("Too low, give a larger number");
+		} else{
+			alert("You have guessed the correct number in " + turns + " turns. It was : " + random_number);
+			break;
+		}
 	}
-	function minus()
-	{
-		var numberOne = parseInt(prompt("Give me a number"));
-		var numberTwo = parseInt(prompt("Give me another number"));
-		div.textContent = numberOne - numberTwo;
-		document.body.appendChild(div);
-	}
-	function times()
-	{
-		var numberOne = parseInt(prompt("Give me a number"));
-		var numberTwo = parseInt(prompt("Give me another number"));
-		div.textContent = numberOne * numberTwo;
-		document.body.appendChild(div);
-	}
-	function divide()
-	{
-		var numberOne = parseInt(prompt("Give me a number"));
-		var numberTwo = parseInt(prompt("Give me another number"));
-		div.textContent = numberOne /  numberTwo;
-		document.body.appendChild(div);
-
-	}
-	function percentof()
-	{
-		var numberOne = parseInt(prompt("Give me a number (percent)"));
-		var numberTwo = parseInt(prompt("Give me another number (percent of)"));
-		div.textContent = numberOne * numberTwo / 100 
-		document.body.appendChild(div);
-
-	}
-
 </script>
 
-<input type="submit" name="" value="Addition" onclick="add()"> 
-<input type="submit" name="" value="Subtraction" onclick="minus()"> 
-<input type="submit" name="" value="Multiplication" onclick="times()"> 
-<input type="submit" name="" value="Division" onclick="divide()"> 
-<input type="submit" name="" value="Percentage Of!" onclick="percentof()"> 
 
 </body>
 </html>
