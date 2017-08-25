@@ -1,0 +1,328 @@
+<body></body>
+
+<script src="http://threejs.org/build/three.min.js"></script>
+<script src="http://gamingJS.com/Sounds.js"></script>
+<script src="http://gamingJS.com/Scoreboard.js"></script>
+<script src="http://gamingJS.com/ChromeFixes.js"></script>
+<script src="http://gamingJS.com/Tween.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+<script>
+//-----------Code for 3D Rendering---------------------
+// This is where stuff in our game will happen:
+var scene = new THREE.Scene();
+
+// This is what sees the stuff:
+var aspect_ratio = window.innerWidth / window.innerHeight;
+var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
+camera.position.z = 500;
+scene.add(camera);
+
+// This will draw what the camera sees onto the screen:
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// ******** START CODING ON THE NEXT LINE ********
+
+
+// Particle System
+var material = new THREE.PointsMaterial({
+	size: 1,
+	vertexColors: THREE.vertexColors
+})
+
+var geometry = new THREE.Geometry();
+_.times(1000, function(n){
+	x = (Math.random() * 800) - 400;
+	y = (Math.random() * 800) - 400;
+	z = (Math.random() * 800) - 400;
+	geometry.vertices.push(new THREE.Vector3(x,y,z)); 
+});
+var pointCloud = new THREE.PointCloud(geometry, material);
+scene.add(pointCloud); 
+
+// ******** Code for generating avatar *********
+var marker  = new THREE.Object3D();
+scene.add(marker);
+var cover = new THREE.MeshNormalMaterial();
+var body = new THREE.SphereGeometry(100);
+var avatar = new THREE.Mesh(body, cover);
+scene.add(avatar);
+var hand = new THREE.SphereGeometry(50);
+var right_hand = new THREE.Mesh(hand, cover);
+right_hand.position.set(-150, 0, 0);
+avatar.add(right_hand);
+var left_hand = new THREE.Mesh(hand, cover);
+left_hand.position.set(150, 0, 0);
+avatar.add(left_hand);
+var foot = new THREE.SphereGeometry(50);
+var right_foot = new THREE.Mesh(foot, cover);
+right_foot.position.set(-75, -125, 0);
+avatar.add(right_foot);
+var left_foot = new THREE.Mesh(foot, cover);
+left_foot.position.set(75, -125, 0);
+avatar.add(left_foot);
+// *******************************************
+marker.add(avatar);
+marker.add(camera);
+
+//scoreboard
+var scoreboard = new Scoreboard();
+scoreboard.countdown(45);
+scoreboard.score();
+scoreboard.help(
+	'Arrow keys to move.'+
+	'Space bar to jump for fruit.'+
+	'Watch for shaking trees with fruit.' +
+	'Get near the tree and jump before the fruit is gone!'
+)
+var game_over = false;
+scoreboard.onTimeExpired(function() {
+	scoreboard.message("Game Over!");
+	game_over = true;
+});
+
+//-----Tree generating function -----
+var not_allowed = [];
+function MakeTreeAt(x,z)
+{
+var boundary = new THREE.Mesh(
+new THREE.CircleGeometry(300),
+new THREE.MeshNormalMaterial()
+);
+boundary.position.y = -100;
+boundary.rotation.x = -Math.PI/2;
+var Top = new THREE.Mesh(
+	new THREE.SphereGeometry(150),
+	new THREE.MeshBasicMaterial({color:0x228B22}));
+var Trunk = new THREE.Mesh(
+	new THREE.CylinderGeometry(50,50, 200),
+	new THREE.MeshBasicMaterial({color:0xA0522D}));
+Top.position.y= 175;
+Trunk.add(Top);
+Trunk.position.set(x, -75, z);
+Trunk.add(boundary);
+not_allowed.push(boundary);
+scene.add(Trunk);
+return Top;
+}
+var shaking_trees;
+var trees = [];
+trees.push(MakeTreeAt(500,0));
+trees.push(MakeTreeAt(-500,0));
+trees.push(MakeTreeAt(750,-1000));
+trees.push(MakeTreeAt(-750,-1000));
+
+
+function shakeTree(){
+shaking_trees = Math.floor(Math.random()*trees.length);
+new TWEEN
+.Tween({x:0})
+.to({x:2*Math.PI}, 200)
+.repeat(20)
+.onUpdate(function(){
+trees[shaking_trees].position.x = 75*Math.sin(this.x);
+})
+.start();
+setTimeout(shakeTree, 12*1000);
+}
+shakeTree();
+
+
+function detectCollisions()
+{
+var vector = new THREE.Vector3(0,-1,0);
+var ray = new THREE.Ray(marker.position, vector);
+var intersects = ray.intersectObjects(not_allowed);
+if (intersects.length >0) return true;
+return false;
+}
+
+var is_cartwheeling = false;
+var is_flipping = false;
+var is_moving_right, is_moving_left, is_moving_forward, is_moving_back;
+
+document.addEventListener('keydown', function(event){
+  var code = event.keyCode;
+	if (code == 32) jump();
+  if (code == 37) {
+  marker.position.x = marker.position.x-5;
+  is_moving_left = true;
+  }
+  if (code == 38) {
+  marker.position.z = marker.position.z-5;
+  is_moving_forward = true;
+  }
+  if (code == 39) {
+  marker.position.x = marker.position.x+5;
+  is_moving_right = true;
+  }
+  if (code == 40) {
+  marker.position.z = marker.position.z+5;
+  is_moving_back = true;
+  }
+  if (code == 67) is_cartwheeling = !is_cartwheeling;
+  if (code == 70) is_flipping = !is_flipping;
+  if (detectCollisions()){
+	if (is_moving_right) marker.position.x = marker.position.x -5;
+	if (is_moving_left) marker.position.x = marker.position.x +5;
+	if (is_moving_forward) marker.position.z = marker.position.z +5;
+	if (is_moving_back) marker.position.z = marker.position.z -5;
+	}
+});
+
+document.addEventListener('keyup', function(event) {
+var code = event.keyCode;
+if (code == 37) is_moving_left = false;
+if (code == 38) is_moving_forward = false;
+if (code == 39) is_moving_right = false;
+if (code == 40) is_moving_back = false;
+});
+
+function isWalking()
+{
+if (is_moving_right) return true;
+if (is_moving_left) return true;
+if (is_moving_forward) return true;
+if (is_moving_back) return true;
+return false;
+};
+
+var clock = new THREE.Clock();
+function walk()
+{
+if(!isWalking()) return;
+var position = Math.sin(clock.getElapsedTime()*5)*50;
+right_hand.position.z = position;
+left_hand.position.z = -position;
+right_foot.position.z = -position;
+left_foot.position.z = position;
+}
+
+//JUMP function
+function jump()
+{
+	checkForTreasure();
+	animateJump();
+}
+
+function checkForTreasure()
+{
+	if (shaking_trees == undefined) return;
+	var treasure_tree = trees[shaking_trees],
+			p1 = treasure_tree.parent.position,
+			p2 = marker.position;
+	var distance = Math.sqrt(
+		(p1.x - p2.x)*(p1.x - p2.x) +
+		(p1.z - p2.z)*(p1.z - p2.z)
+	);
+	if (distance < 500)
+	{
+		scorePoints();
+	}
+}
+
+function animateJump() {
+	new TWEEN
+			.Tween({jump: 0})
+			.to({jump:Math.PI}, 500)
+			.onUpdate(function(){
+				marker.position.y = 200* Math.sin(this.jump);
+			})
+			.start();
+}
+
+
+function scorePoints()
+{
+	if (scoreboard.getTimeRemaining() === 0) return;
+	scoreboard.addPoints(10);
+	Sounds.bubble.play();
+	animateFruit();
+}
+
+//fruit
+
+var fruit;
+function animateFruit(){
+	if (fruit) return;
+	fruit = new THREE.Mesh(
+		new THREE.CylinderGeometry(25, 25, 5, 25),
+		new THREE.MeshBasicMaterial({color:0xFFD700})
+	);
+	fruit.rotation.x = Math.PI/2;
+
+	marker.add(fruit);
+
+	new TWEEN
+		.Tween({heigh:150,spin:0})
+		.to ({height: 250,spin:4}, 500)
+		.onUpdate(function(){
+			fruit.position.y = this.height;
+			fruit.rotation.z = this.spin;
+		})
+		.onComplete(function(){
+			marker.remove(fruit);
+			fruit = undefined;
+		})
+		.start();
+}
+
+
+function acrobatics()
+{
+if(is_cartwheeling)
+{avatar.rotation.z = avatar.rotation.z + 0.05;
+}
+if(is_flipping)
+{avatar.rotation.x = avatar.rotation.x + 0.05;
+}
+};
+
+function turn(){
+	var direction = 0;
+	if (is_moving_forward) direction = Math.PI;
+	if (is_moving_back) direction = 0;
+	if (is_moving_right) direction = Math.PI/2;
+	if (is_moving_left) direction = -Math.PI/2;
+	spinAvatar(direction);
+}
+
+function spinAvatar(direction){
+	new TWEEN.
+	Tween({y:avatar.rotation.y}).
+	to({y:direction}, 100).
+	onUpdate(function(){
+		avatar.rotation.y = this.y;
+	}).
+	start();
+}
+
+
+function render(){
+	window.requestAnimationFrame(render);
+	_.forEach(geometry.vertices, function(particle){
+		var dX, dY, dZ;
+		dX = Math.random() * 2 - 1; 
+		dY = Math.random() * 2 - 1;
+		dZ = Math.random() * 2 - 1;
+		particle.add(new THREE.Vector3(dX, dY, dZ));
+	});
+	geometry.verticesNeedUpdate = true;
+
+
+	renderer.render(scene, camera);
+}
+
+function animate()
+{
+requestAnimationFrame(animate);
+TWEEN.update();
+turn();
+walk();
+acrobatics();
+render();
+}
+animate();
+
+</script>

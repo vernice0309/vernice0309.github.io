@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+@keyframes animate {
+	0% {background-color: black ; border-radius : 5px;}
+	25%{background-color: blue ; border-radius : 10px;}
+	50%{background-color: turquoise ; border-radius : 80px;}
+	75%{background-color: purple; border-radius : 160px;}
+	100%{background-color: lightblue ; border-radius : 320px;}
+}	
+
+@keyframes animateRadiusOfImage {
+	0%  { border-radius : 5px;  }
+	25% { border-radius : 10px; }
+	50% { border-radius : 80px; }
+	75% { border-radius : 160px;}
+	100%{ border-radius : 320px;}
+}	
+
+
+
+#square {
+	width : 200px;
+	height : 200px;
+	background-color:  black;
+	animation-name: animate;
+	animation-duration: 10s;
+	animation-iteration-count: 10;
+
+}
+</style>
+</head>
+<body>
+<div id = square></div>
+</body>
+</html>

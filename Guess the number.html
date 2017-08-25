@@ -99,12 +99,12 @@
 </head>
 <body>
 <script type="text/javascript">
-	var random_number = Math.floor(Math.random() * 100) + 1;
+	var random_number = Math.floor(Math.random() * 1000) + 1;
 	var player = -1;
 	var turns = 0
 	while (random_number!=player) {
 		turns = turns + 1
-		player = parseInt(prompt("Enter a number"));
+		player = parseInt(prompt("Enter a number between 1 and 1000"));
 		if (player > random_number) {
 			alert("Too High, give a smaller number");
 		} else if (player < random_number) {
